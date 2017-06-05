@@ -13,15 +13,15 @@
         </mu-th>
       </mu-thead>
       <mu-tbody>
-        <mu-tr>
+        <mu-tr v-for="word in words" :key="word.id">
           <mu-td>
-            nihon go
+            {{word.jp}}
           </mu-td>
           <mu-td>
-            ei go
+            {{word.en}}
           </mu-td>
           <mu-td>
-            tai go
+            {{word.th}}
           </mu-td>
         </mu-tr>
       </mu-tbody>
@@ -35,7 +35,22 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      showCheckbox: false
+      showCheckbox: false,
+      words: [{
+        jp: '農作業',
+        en: 'Agriculture activity',
+        th: 'Taigo'
+      },
+      {
+        jp: '作物生育制御作業',
+        en: 'Handling for plant growth control',
+        th: 'Taigo 2'
+      },
+      {
+        jp: '繁殖準備作業',
+        en: 'Preparation of plant propagation',
+        th: 'Taigo 3'
+      }]
     }
   }
 }
