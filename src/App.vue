@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <mu-appbar title="Cavoc translator"></mu-appbar>
-    <hello></hello>
+    <mu-appbar :title="title"></mu-appbar>
+    <translator-chart></translator-chart>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import TranslatorChart from './components/TranslatorChart'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    TranslatorChart
+  },
+  data () {
+    return {
+      title: 'CAVOC translator'
+    }
   }
 }
 </script>
