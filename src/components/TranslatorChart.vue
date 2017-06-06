@@ -30,10 +30,12 @@
             {{word.th}}
           </mu-td>
           <mu-td>
-            <h3 v-if="word.verified">Hello World!</h3>
+            <h3 v-if="word.verified">
+               <mu-icon value="done" color="#4CAF50"/>
+            </h3>
           </mu-td>
           <mu-td>
-            <button @click="translate(word.ja)">Translate</button>
+             <mu-flat-button label="Translate" class="demo-flat-button" primary @click="translate(word.ja)"/>
           </mu-td>
         </mu-tr>
       </mu-tbody>
