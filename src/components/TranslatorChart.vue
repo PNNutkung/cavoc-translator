@@ -35,7 +35,7 @@
             </h3>
           </mu-td>
           <mu-td>
-             <mu-flat-button label="Translate" class="demo-flat-button" primary @click="translate(word.ja)"/>
+            <TranslatorModal :japanese-word="word.ja"></TranslatorModal>
           </mu-td>
         </mu-tr>
       </mu-tbody>
@@ -44,8 +44,13 @@
 </template>
 
 <script>
+import TranslatorModal from './TranslatorModal'
+
 export default {
   name: 'translator-chart',
+  components: {
+    TranslatorModal
+  },
   data () {
     return {
       showCheckbox: false,
@@ -68,13 +73,6 @@ export default {
         th: 'Taigo 3',
         verified: false
       }]
-    }
-  },
-  methods: {
-    // TODO: Call tranlate API to Google Translate and show the translated back.
-    translate (word) {
-      console.log(word)
-      alert(`Hello ${word}`)
     }
   }
 }
