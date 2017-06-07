@@ -1,12 +1,10 @@
 <template>
-  <modal name="word-check-modal">
-    <div slot="top-right">
-      <button @click="hide()">
-        ❌
-      </button>
-    </div>
+  <modal name="word-check-modal" class="modal-for-translate">
     <div id="modal-content">
-      {{word.ja}}
+      <p id="translate-text">
+        <h1>{{word.ja}}</h1>
+        <h1>{{word.th}}</h1>
+      </p>
       <div id="modal-btns">
         <mu-flat-button label="G Translate" @click="googleTransalateAPIPost()" />
         <mu-flat-button label="Cancel" @click="hide()" secondary />
@@ -41,9 +39,15 @@ export default {
 #modal-content {
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 #modal-btns {
   display: flex;
   justify-content: space-around;
+}
+#translate-text {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
 }
 </style>
