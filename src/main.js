@@ -4,9 +4,11 @@ import Vue from 'vue'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import 'muse-ui/dist/theme-light.css'
+import vmodal from 'vue-js-modal'
 import App from './App'
 
 Vue.use(MuseUI)
+Vue.use(vmodal)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

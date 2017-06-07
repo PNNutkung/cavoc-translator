@@ -35,17 +35,17 @@
             </h3>
           </mu-td>
           <mu-td>
-            <TranslatorModal :japanese-word="word.ja"></TranslatorModal>
+            <mu-flat-button id="show-modal" label="Translate" class="demo-flat-button" primary @click="show(word)"/>
           </mu-td>
         </mu-tr>
       </mu-tbody>
     </mu-table>
+    <TranslatorModal :word="selectedWord" :edit-thai-translated="editThaiTranslated" />
   </div>
 </template>
 
 <script>
 import TranslatorModal from './TranslatorModal'
-
 export default {
   name: 'translator-chart',
   components: {
@@ -72,7 +72,17 @@ export default {
         en: 'Preparation of plant propagation',
         th: 'Taigo 3',
         verified: false
-      }]
+      }],
+      selectedWord: ''
+    }
+  },
+  methods: {
+    show (word) {
+      this.selectedWord = word
+      this.$modal.show('word-check-modal')
+    },
+    editThaiTranslated (word) {
+      console.log(word)
     }
   }
 }

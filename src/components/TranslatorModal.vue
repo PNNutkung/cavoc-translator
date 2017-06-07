@@ -1,38 +1,49 @@
 <template>
-<!-- app -->
-<div id="app">
-  <mu-flat-button id="show-modal" label="Translate" class="demo-flat-button" primary @click="translate(japaneseWord)"/>
-  <!-- use the modal component, pass in the prop -->
-  <modal v-if="showModal" @close="showModal = false">
-    <!--
-      you can use custom content here to overwrite
-      default content
-    -->
-    <h3 slot="header">custom header</h3>
+  <modal name="word-check-modal">
+    <div slot="top-right">
+      <button @click="hide()">
+        ❌
+      </button>
+    </div>
+    <div id="modal-content">
+      {{word.ja}}
+      <div id="modal-btns">
+        <mu-flat-button label="G Translate" @click="googleTransalateAPIPost()" />
+        <mu-flat-button label="Cancel" @click="hide()" secondary />
+        <mu-flat-button label="Submit" @click="editThaiTranslated(word.ja)" primary />
+      </div>
+    </div>
   </modal>
-</div>
 </template>
 
 <script>
 export default {
-  name: 'modal',
+  name: 'TranslatorModal',
+  props: ['word', 'editThaiTranslated'],
   data () {
     return {
-      showModal: false
+      wordToTranslate: this.word
     }
   },
-  props: ['japaneseWord'],
   methods: {
     // TODO: Call tranlate API to Google Translate and show the translated back.
-    translate (word) {
-      this.showModal = true
-      console.log(word)
-      alert(`Hello ${word}`)
+    googleTransalateAPIPost () {
+      console.log(this.wordToTranslate.en)
+    },
+    hide () {
+      this.$modal.hide('modal')
     }
   }
 }
 </script>
 
 <style>
-
+#modal-content {
+  display: flex;
+  flex-direction: column;
+}
+#modal-btns {
+  display: flex;
+  justify-content: space-around;
+}
 </style>
