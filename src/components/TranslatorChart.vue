@@ -20,13 +20,13 @@
       </mu-thead>
       <mu-tbody>
         <mu-tr v-for="word in words" :key="word.index">
-          <mu-td>
+          <mu-td class="word-in-table">
             {{word.ja}}
           </mu-td>
-          <mu-td>
+          <mu-td class="word-in-table">
             {{word.en}}
           </mu-td>
-          <mu-td>
+          <mu-td class="word-in-table">
             {{word.th}}
           </mu-td>
           <mu-td>
@@ -69,7 +69,7 @@ export default {
       },
       {
         ja: '繁殖準備作業',
-        en: 'Preparation of plant propagation',
+        en: 'Preparation of plant propagation aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
         th: 'Taigo 3',
         verified: false
       }],
@@ -81,8 +81,9 @@ export default {
       this.selectedWord = word
       this.$modal.show('word-check-modal')
     },
+    // TODO: save changes maybe use v-model?
     editThaiTranslated (word) {
-      console.log(word)
+      console.log(word.verified)
     }
   }
 }
@@ -90,4 +91,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  #translating-table {
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+  #translating-table .word-in-table {
+    word-wrap: break-word;
+  }
 </style>

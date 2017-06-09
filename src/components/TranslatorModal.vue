@@ -1,14 +1,29 @@
 <template>
-  <modal name="word-check-modal" class="modal-for-translate">
+  <modal name="word-check-modal">
     <div id="modal-content">
-      <p id="translate-text">
-        <h1>{{word.ja}}</h1>
-        <h1>{{word.th}}</h1>
-      </p>
+      <mu-table id="translating-modal" :showCheckbox="showCheckbox" :selectable="selectable">
+        <mu-tbody>
+          <mu-tr>
+            <mu-td>
+              {{word.ja}}
+            </mu-td>
+            <mu-td>
+              {{word.en}}
+            </mu-td>
+            <mu-td>
+              <input type="text" name="thai-lang" v-model="word.th" :value="word.th">
+            </mu-td>
+          </mu-tr>
+        </mu-tbody>
+      </mu-table>
+      <span>
+        <input type="checkbox" v-model="word.verified" id="modal-checkbox" name="word-verify" :value="word.verified"/>
+        <label for="modal-checkbox">Verify?</label>
+      </span>
       <div id="modal-btns">
         <mu-flat-button label="G Translate" @click="googleTransalateAPIPost()" />
         <mu-flat-button label="Cancel" @click="hide()" secondary />
-        <mu-flat-button label="Submit" @click="editThaiTranslated(word.ja)" primary />
+        <mu-flat-button label="Submit" @click="submit(word)" primary />
       </div>
     </div>
   </modal>
@@ -20,34 +35,36 @@ export default {
   props: ['word', 'editThaiTranslated'],
   data () {
     return {
-      wordToTranslate: this.word
+      showCheckbox: false,
+      selectable: false
     }
   },
   methods: {
     // TODO: Call tranlate API to Google Translate and show the translated back.
     googleTransalateAPIPost () {
-      console.log(this.wordToTranslate.en)
+      console.log(this.word.ja)
     },
     hide () {
-      this.$modal.hide('modal')
+      this.$modal.hide('word-check-modal')
+    },
+    submit (word) {
+      this.editThaiTranslated(word)
+      this.hide()
     }
   }
 }
 </script>
 
-<style>
-#modal-content {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-#modal-btns {
-  display: flex;
-  justify-content: space-around;
-}
-#translate-text {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-}
+<style scoped>
+  #modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+  }
+
+  #modal-btns {
+    display: flex;
+    justify-content: space-around;
+  }
 </style>
