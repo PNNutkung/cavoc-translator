@@ -7,6 +7,11 @@
 
 <script>
 import TranslatorChart from './components/TranslatorChart'
+import Firebase from 'firebase'
+import FirebaseConfig from './config/FirebaseConfig'
+
+const firebaseApp = Firebase.initializeApp(FirebaseConfig)
+const db = firebaseApp.database()
 
 export default {
   name: 'app',
@@ -17,6 +22,9 @@ export default {
     return {
       title: 'CAVOC translator'
     }
+  },
+  firebase: {
+    words: db.ref('word')
   }
 }
 </script>
