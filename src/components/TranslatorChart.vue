@@ -82,7 +82,7 @@ export default {
       this.selectedWord = word
       this.$modal.show('word-check-modal')
     },
-    // TODO: save changes maybe use v-model?
+    // TODO: save to Firebase
     editThaiTranslated (word) {
       console.log(`original: ${this.selectedWord.verified} | props: ${word.verified}`)
     }

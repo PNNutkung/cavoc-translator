@@ -49,7 +49,6 @@ export default {
     cancel () {
       this.word.th = this.defaultThWord
       this.word.verified = this.defaultVerified
-      console.log(`original = ${this.word.verified} | cached = ${this.defaultVerified}`)
       this.hide()
     },
     hide () {
