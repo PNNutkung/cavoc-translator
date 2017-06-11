@@ -1,5 +1,5 @@
 <template>
-  <modal name="word-check-modal">
+  <modal name="word-check-modal" @before-open="beforeOpen">
     <div id="modal-content">
       <mu-table id="translating-modal" :showCheckbox="showCheckbox" :selectable="selectable">
         <mu-tbody>
@@ -22,7 +22,7 @@
       </span>
       <div id="modal-btns">
         <mu-flat-button label="G Translate" @click="googleTransalateAPIPost()" />
-        <mu-flat-button label="Cancel" @click="hide()" secondary />
+        <mu-flat-button label="Cancel" @click="cancel()" secondary />
         <mu-flat-button label="Submit" @click="submit(word)" primary />
       </div>
     </div>
@@ -36,7 +36,9 @@ export default {
   data () {
     return {
       showCheckbox: false,
-      selectable: false
+      selectable: false,
+      defaultThWord: '',
+      defaultVerified: null
     }
   },
   methods: {
@@ -44,12 +46,23 @@ export default {
     googleTransalateAPIPost () {
       console.log(this.word.ja)
     },
+    cancel () {
+      this.word.th = this.defaultThWord
+      this.word.verified = this.defaultVerified
+      console.log(`original = ${this.word.verified} | cached = ${this.defaultVerified}`)
+      this.hide()
+    },
     hide () {
       this.$modal.hide('word-check-modal')
     },
     submit (word) {
+      // TODO: Save to Firebase.
       this.editThaiTranslated(word)
       this.hide()
+    },
+    beforeOpen (event) {
+      this.defaultThWord = this.word.th
+      this.defaultVerified = this.word.verified
     }
   }
 }
