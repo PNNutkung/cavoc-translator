@@ -36,10 +36,10 @@
           </mu-td>
           <mu-td>
             <mu-flat-button id="show-modal" label="Translate" class="demo-flat-button" primary @click="show(word)"/>
+            <TranslatorModal :selectedWord="word" :edit-thai-translated="editThaiTranslated" />
           </mu-td>
         </mu-tr>
       </mu-tbody>
-      <TranslatorModal :word="selectedWord" :edit-thai-translated="editThaiTranslated" />
     </mu-table>
   </div>
 </template>
@@ -73,14 +73,12 @@ export default {
         en: 'Preparation of plant propagation',
         th: 'Taigo 3',
         verified: false
-      }],
-      selectedWord: ''
+      }]
     }
   },
   methods: {
     show (word) {
-      this.selectedWord = word
-      this.$modal.show('word-check-modal')
+      this.$modal.show(word.ja)
     },
     // TODO: save to Firebase
     editThaiTranslated (word) {
