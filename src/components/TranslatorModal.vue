@@ -2,6 +2,17 @@
   <modal :name="selectedWord.ja" @before-open="beforeOpen">
     <div id="modal-content">
       <mu-table id="translating-modal" :showCheckbox="showCheckbox" :selectable="selectable">
+        <mu-thead>
+          <mu-th>
+            <h2>Japanese</h2>
+          </mu-th>
+          <mu-th>
+            <h2>English</h2>
+          </mu-th>
+          <mu-th>
+            <h2>Thai</h2>
+          </mu-th>
+        </mu-thead>
         <mu-tbody>
           <mu-tr>
             <mu-td>
@@ -17,8 +28,7 @@
         </mu-tbody>
       </mu-table>
       <span class="verified-checkbox">
-        <input type="checkbox" v-model="selectedWord.verified" id="modal-checkbox" name="word-verify" :value="selectedWord.verified"/>
-        <label for="modal-checkbox">Verify?</label>
+        <mu-checkbox label="Verify?" v-model="selectedWord.verified" id="modal-checkbox" name="word-verify" :value="selectedWord.verified"/>
       </span>
       <div id="modal-btns">
         <mu-flat-button label="G Translate" @click="googleTransalateAPIPost()" />
@@ -84,5 +94,10 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+  }
+
+  td {
+    white-space: normal;
+    word-wrap: break-word;
   }
 </style>

@@ -78,4 +78,8 @@ export default {
 </script>
 
 <style scoped>
+  td {
+    white-space: normal;
+    word-wrap: break-word;
+  }
 </style>
