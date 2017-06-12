@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <mu-appbar :title="title"></mu-appbar>
-    <translator-chart :words-ref="words"></translator-chart>
+    <translator-chart :words-firebase="words" :firebase-db="firebaseDatabase"></translator-chart>
   </div>
 </template>
 
@@ -20,11 +20,14 @@ export default {
   },
   data () {
     return {
-      title: 'CAVOC translator'
+      title: 'CAVOC translator',
+      firebaseDatabase: db
     }
   },
-  firebase: {
-    words: db.ref('words')
+  firebase: function () {
+    return {
+      words: db.ref('words')
+    }
   }
 }
 </script>

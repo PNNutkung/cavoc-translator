@@ -55,7 +55,6 @@ export default {
       this.$modal.hide(this.selectedWord.ja)
     },
     submit (word) {
-      // TODO: Save to Firebase.
       this.editThaiTranslated(word)
       this.hide()
     },

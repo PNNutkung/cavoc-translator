@@ -19,7 +19,7 @@
         </mu-th>
       </mu-thead>
       <mu-tbody>
-        <mu-tr v-for="word in words" :key="word.index">
+        <mu-tr v-for="word in words" :key="word['.key']">
           <mu-td class="word-in-table">
             {{word.ja}}
           </mu-td>
@@ -31,7 +31,7 @@
           </mu-td>
           <mu-td>
             <h3 v-if="word.verified">
-               <mu-icon value="done" color="#4CAF50"/>
+               <mu-icon value="done" :color="green"/>
             </h3>
           </mu-td>
           <mu-td>
@@ -51,27 +51,31 @@ export default {
   components: {
     TranslatorModal
   },
-  props: ['wordsRef'],
+  props: ['wordsFirebase', 'firebaseDb'],
   data () {
     return {
       showCheckbox: false,
       selectable: false,
-      // TODO: Connect with Firebase.
-      words: this.wordsRef
+      words: this.wordsFirebase,
+      green: '#4CAF50'
     }
   },
   methods: {
     show (word) {
       this.$modal.show(word.ja)
     },
-    // TODO: save to Firebase
     editThaiTranslated (word) {
-      console.log(word)
+      let ref = this.firebaseDb.ref('words')
+      ref.child(word['.key']).update({
+        ja: word.ja,
+        en: word.en,
+        th: word.th,
+        verified: word.verified
+      })
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
