@@ -62,8 +62,6 @@ export default {
     beforeOpen (event) {
       this.defaultThWord = this.selectedWord.th
       this.defaultVerified = this.selectedWord.verified
-      console.log(this.selectedWord)
-      console.log(`Hello World! \n defaultThWord: ${this.defaultThWord} \n defaultVerified: ${this.defaultVerified}`)
     }
   }
 }

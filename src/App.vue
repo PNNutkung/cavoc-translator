@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <mu-appbar :title="title"></mu-appbar>
-    <translator-chart></translator-chart>
+    <translator-chart :words-ref="words"></translator-chart>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
     }
   },
   firebase: {
-    words: db.ref('word')
+    words: db.ref('words')
   }
 }
 </script>

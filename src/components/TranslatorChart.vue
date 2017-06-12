@@ -51,29 +51,13 @@ export default {
   components: {
     TranslatorModal
   },
+  props: ['wordsRef'],
   data () {
     return {
       showCheckbox: false,
       selectable: false,
       // TODO: Connect with Firebase.
-      words: [{
-        ja: '農作業',
-        en: 'Agriculture activity',
-        th: 'Taigo',
-        verified: true
-      },
-      {
-        ja: '作物生育制御作業',
-        en: 'Handling for plant growth control',
-        th: 'Taigo 2',
-        verified: false
-      },
-      {
-        ja: '繁殖準備作業',
-        en: 'Preparation of plant propagation',
-        th: 'Taigo 3',
-        verified: false
-      }]
+      words: this.wordsRef
     }
   },
   methods: {
@@ -82,7 +66,7 @@ export default {
     },
     // TODO: save to Firebase
     editThaiTranslated (word) {
-      console.log(`original: ${this.selectedWord.verified} | props: ${word.verified}`)
+      console.log(word)
     }
   }
 }
