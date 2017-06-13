@@ -22,7 +22,7 @@
               {{selectedWord.en}}
             </mu-td>
             <mu-td>
-              <input type="text" name="thai-lang" v-model="selectedWord.th" :value="selectedWord.th">
+              <mu-text-field label="Thai" name="thai-lang" v-model="selectedWord.th" :value="selectedWord.th" labelFloat />
             </mu-td>
           </mu-tr>
         </mu-tbody>
