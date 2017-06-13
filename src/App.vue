@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <mu-appbar :title="title">
-      <add-word-modal slot="right" id="add-word-modal" />
+      <add-word-modal :firebase-db="firebaseDatabase" slot="right" id="add-word-modal" />
     </mu-appbar>
     <translator-chart :words-firebase="words" :firebase-db="firebaseDatabase"></translator-chart>
   </div>

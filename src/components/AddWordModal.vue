@@ -7,8 +7,8 @@
           <h2 v-if="message !== ''">
             {{message}}
           </h2>
-          <mu-text-field label="Japanese" name="japanese" v-model="newWords.ja" labelFloat fullWidth />
-          <mu-text-field label="Eniglish" name="english" v-model="newWords.en" labelFloat fullWidth />
+          <mu-text-field label="Japanese" name="japanese" v-model="newWords.ja" labelFloat fullWidth @keyup.native.enter="addToDatabase" />
+          <mu-text-field label="Eniglish" name="english" v-model="newWords.en" labelFloat fullWidth @keyup.native.enter="addToDatabase" />
           <mu-raised-button label="submit" primary fullWidth @click="addToDatabase" />
           <mu-raised-button id="cancel-modal-btn" label="cancel" fullWidth @click="close" />
         </div>
@@ -20,6 +20,7 @@
 <script>
 export default {
   name: 'add-word-modal',
+  props: ['firebaseDb'],
   data () {
     return {
       dialog: false,
@@ -47,6 +48,9 @@ export default {
       this.message = ''
       this.dialog = false
     },
+    checkInputsData () {
+      return this.newWords.ja !== '' && this.newWords.en !== ''
+    },
     addToDatabase () {
       if (this.checkInputsData()) {
         let ref = this.firebaseDb.ref('words')
@@ -55,11 +59,6 @@ export default {
       } else {
         this.message = 'New words cannot be blank.'
       }
-    }
-  },
-  watch: {
-    checkInputsData: function () {
-      return this.newWords.ja !== '' && this.newWords.en !== ''
     }
   }
 }
