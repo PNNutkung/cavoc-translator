@@ -1,10 +1,9 @@
 <template>
   <div id="app">
     <mu-appbar :title="title">
-      <mu-flat-button label="Add new word" slot="right" @click="addNewWord()"/>
+      <add-word-modal slot="right" id="add-word-modal" />
     </mu-appbar>
     <translator-chart :words-firebase="words" :firebase-db="firebaseDatabase"></translator-chart>
-    <add-word-modal/>
   </div>
 </template>
 
@@ -33,14 +32,12 @@ export default {
     return {
       words: db.ref('words')
     }
-  },
-  methods: {
-    addNewWord () {
-      this.$modal.show('Add new word')
-    }
   }
 }
 </script>
 
-<style>
+<style scoped>
+  #add-word-modal {
+    height: 100%;
+  }
 </style>
