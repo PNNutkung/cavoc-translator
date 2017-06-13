@@ -1,15 +1,15 @@
 <template>
   <div>
-    <mu-flat-button label="Add new word" slot="right" @click="open"/>
+    <mu-flat-button label="Add new word" @click="open"/>
     <mu-dialog :open="dialog" title="Add new word" @close="close">
       <form action="">
         <div class="add-new-word-modal">
           <h2 v-if="message !== ''">
             {{message}}
           </h2>
-          <mu-text-field label="Japanese" name="japanese" labelFloat fullWidth />
-          <mu-text-field label="Eniglish" name="english" labelFloat fullWidth />
-          <mu-raised-button label="submit" primary fullWidth />
+          <mu-text-field label="Japanese" name="japanese" v-model="newWords.ja" labelFloat fullWidth />
+          <mu-text-field label="Eniglish" name="english" v-model="newWords.en" labelFloat fullWidth />
+          <mu-raised-button label="submit" primary fullWidth @click="addToDatabase" />
           <mu-raised-button id="cancel-modal-btn" label="cancel" fullWidth @click="close" />
         </div>
       </form>
@@ -38,17 +38,28 @@ export default {
       this.dialog = true
     },
     close () {
+      this.newWords = {
+        ja: '',
+        en: '',
+        th: '',
+        verified: false
+      }
+      this.message = ''
       this.dialog = false
-    },
-    checkInputsData () {
-      return false
     },
     addToDatabase () {
       if (this.checkInputsData()) {
+        let ref = this.firebaseDb.ref('words')
+        ref.push(this.newWords)
         this.close()
       } else {
         this.message = 'New words cannot be blank.'
       }
+    }
+  },
+  watch: {
+    checkInputsData: function () {
+      return this.newWords.ja !== '' && this.newWords.en !== ''
     }
   }
 }

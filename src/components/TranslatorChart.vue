@@ -30,12 +30,9 @@
             {{word.th}}
           </mu-td>
           <mu-td>
-            <h3 v-if="word.verified">
-               <mu-icon value="done" :color="green"/>
-            </h3>
+            <mu-icon v-if="word.verified" value="done" :color="green"/>
           </mu-td>
           <mu-td>
-            <mu-flat-button id="show-modal" label="Translate" class="demo-flat-button" primary @click="show(word)"/>
             <TranslatorModal :selectedWord="word" :edit-thai-translated="editThaiTranslated" />
           </mu-td>
         </mu-tr>
@@ -61,9 +58,6 @@ export default {
     }
   },
   methods: {
-    show (word) {
-      this.$modal.show(word.ja)
-    },
     editThaiTranslated (word) {
       let ref = this.firebaseDb.ref('words')
       ref.child(word['.key']).update({

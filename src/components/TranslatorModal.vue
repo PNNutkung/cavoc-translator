@@ -1,6 +1,7 @@
 <template>
-  <modal :name="selectedWord.ja" @before-open="beforeOpen">
-    <div id="modal-content">
+  <div>
+    <mu-flat-button label="Translate" @click="open" primary />
+    <mu-dialog title="Translate" :name="selectedWord.ja" :open="dialog" @close="close">
       <mu-table id="translating-modal" :showCheckbox="showCheckbox" :selectable="selectable">
         <mu-thead>
           <mu-th>
@@ -22,21 +23,19 @@
               {{selectedWord.en}}
             </mu-td>
             <mu-td>
-              <mu-text-field label="Thai" name="thai-lang" v-model="selectedWord.th" :value="selectedWord.th" labelFloat />
+              <mu-text-field hintText="Thai" v-model="selectedWord.th" :value="selectedWord.th" fullWidth />
             </mu-td>
           </mu-tr>
         </mu-tbody>
       </mu-table>
-      <span class="verified-checkbox">
-        <mu-checkbox label="Verify?" v-model="selectedWord.verified" id="modal-checkbox" name="word-verify" :value="selectedWord.verified"/>
-      </span>
+      <mu-checkbox label="Verify?" v-model="selectedWord.verified" id="modal-verify" name="word-verify" :value="selectedWord.verified"/>
       <div id="modal-btns">
         <mu-flat-button label="G Translate" @click="googleTransalateAPIPost()" />
         <mu-flat-button label="Cancel" @click="cancel()" secondary />
         <mu-flat-button label="Submit" @click="submit(selectedWord)" primary />
       </div>
-    </div>
-  </modal>
+    </mu-dialog>
+  </div>
 </template>
 
 <script>
@@ -48,7 +47,8 @@ export default {
       showCheckbox: false,
       selectable: false,
       defaultThWord: '',
-      defaultVerified: null
+      defaultVerified: null,
+      dialog: false
     }
   },
   methods: {
@@ -59,16 +59,17 @@ export default {
     cancel () {
       this.selectedWord.th = this.defaultThWord
       this.selectedWord.verified = this.defaultVerified
-      this.hide()
+      this.close()
     },
-    hide () {
-      this.$modal.hide(this.selectedWord.ja)
+    close () {
+      this.dialog = false
     },
     submit (word) {
       this.editThaiTranslated(word)
-      this.hide()
+      this.close()
     },
-    beforeOpen (event) {
+    open () {
+      this.dialog = true
       this.defaultThWord = this.selectedWord.th
       this.defaultVerified = this.selectedWord.verified
     }
@@ -77,23 +78,14 @@ export default {
 </script>
 
 <style scoped>
-  #modal-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 20px;
-    height: 100%;
-  }
-
   #modal-btns {
     display: flex;
     justify-content: space-around;
   }
 
-  .verified-checkbox {
+  #modal-verify {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   td {
