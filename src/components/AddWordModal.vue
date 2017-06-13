@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mu-flat-button label="Add new word" @click="open"/>
+    <mu-flat-button label="Add new word" icon="add" @click="open"/>
     <mu-dialog :open="dialog" title="Add new word" @close="close">
       <form action="">
         <div class="add-new-word-modal">
