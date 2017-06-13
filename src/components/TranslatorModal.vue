@@ -41,6 +41,12 @@
 </template>
 
 <script>
+import axios from 'axios'
+import AUTH_TOKEN from '../config/translateAPI'
+
+axios.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN.key}`
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+
 export default {
   name: 'TranslatorModal',
   props: ['selectedWord', 'editThaiTranslated'],
@@ -56,6 +62,13 @@ export default {
   methods: {
     // TODO: Call tranlate API to Google Translate and show the translated back.
     googleTransalateAPIPost () {
+      axios.post(`https://translation.googleapis.com/language/translate/v2?q=${this.selectedWord.ja}&target=th&format=text&source=ja`)
+      .then((res) => {
+        this.selectedWord.th = res.data.data.translations[0].translatedText
+      })
+      .catch((err) => {
+        console.log(err)
+      })
       console.log(this.selectedWord.ja)
     },
     cancel () {
