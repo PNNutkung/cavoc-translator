@@ -23,7 +23,7 @@
               {{selectedWord.en}}
             </mu-td>
             <mu-td>
-              <mu-text-field hintText="Thai" v-model="selectedWord.th" :value="selectedWord.th" fullWidth />
+              <mu-text-field hintText="Thai" v-model="selectedWord.th" :value="selectedWord.th" @keyup.native.enter="submit(selectedWord)" fullWidth />
             </mu-td>
           </mu-tr>
         </mu-tbody>
