@@ -16,11 +16,21 @@ export default {
         'en',
         'th'
       ]
-      json2csv({data: this.wordsFirebase, fields: column}, (err, result) => {
+      let columnNames = [
+        'Japanese',
+        'English',
+        'Thai'
+      ]
+      json2csv({data: this.wordsFirebase, fields: column, fieldNames: columnNames}, (err, result) => {
         if (err) {
           console.log(err)
         }
-        console.log(result)
+        let link = document.createElement('a')
+        link.href = `data:text/csv;charset=utf-8,${encodeURI(result)}`
+        link.target = '_blank'
+        link.download = 'cavoc-thai-translated.csv'
+        document.body.appendChild(link)
+        link.click()
       })
     }
   }
