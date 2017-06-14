@@ -1,5 +1,5 @@
 <template>
-  <mu-flat-button label="Download" @click="downloadCSV"/>
+  <mu-flat-button label="Download CSV" @click="downloadCSV" icon="file_download" />
 </template>
 
 <script>
