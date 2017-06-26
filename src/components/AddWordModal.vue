@@ -8,7 +8,7 @@
             {{message}}
           </h2>
           <mu-text-field label="Japanese" name="japanese" v-model="newWords.ja" labelFloat fullWidth @keyup.native.enter="addToDatabase" />
-          <mu-text-field label="Eniglish" name="english" v-model="newWords.en" labelFloat fullWidth @keyup.native.enter="addToDatabase" />
+          <mu-text-field label="English" name="english" v-model="newWords.en" labelFloat fullWidth @keyup.native.enter="addToDatabase" />
           <mu-raised-button label="submit" primary fullWidth @click="addToDatabase" />
           <mu-raised-button id="cancel-modal-btn" label="cancel" fullWidth @click="close" />
         </div>
